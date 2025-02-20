@@ -1,0 +1,48 @@
+{
+  "name": "@mikelambson/secure-auth",
+  "version": "0.1.0-alpha",
+  "description": "A secure, configurable authentication framework for Node.js applications, supporting Argon2, JWTs, ECDSA, RSA, and multiple databases/frameworks (alpha, incomplete).",
+  "keywords": [
+    "authentication",
+    "jwt",
+    "argon2",
+    "ecdsa",
+    "rsa",
+    "security",
+    "middleware",
+    "nodejs"
+  ],
+  "homepage": "https://github.com/mikelambson/secure-auth#readme",
+  "bugs": {
+    "url": "https://github.com/mikelambson/secure-auth/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikelambson/secure-auth.git"
+  },
+  "license": "BSD-3-Clause",
+  "author": "V. Michael Lambson <mikelambson@example.com>",
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@simplewebauthn/server": "^13.1.1",
+    "argon2": "^0.41.1",
+    "cookie": "^1.0.2",
+    "jsonwebtoken": "^9.0.2",
+    "uuid": "^11.1.0"
+  },
+  "bin": {
+    "secure-auth": "./cli.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "@types/uuid": "^10.0.0",
+    "jest": "^29.7.0",
+    "typescript": "^5.7.3"
+  }
+}
