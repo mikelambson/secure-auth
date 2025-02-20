@@ -1,7 +1,8 @@
 import {
-    generateAuthenticationOptions,
-    verifyAuthenticationResponse,
-  } from "@simplewebauthn/server";
+  generateAuthenticationOptions,
+  verifyAuthenticationResponse
+} from "@simplewebauthn/server/esm";
+
   
   export class WebAuthn {
     /**

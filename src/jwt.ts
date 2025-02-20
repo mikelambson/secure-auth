@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import * as jwt from "jsonwebtoken";
 import * as fs from "fs";
 import * as path from "path";
 import { v4 as uuidv4 } from "uuid";
@@ -42,12 +42,12 @@ export class JWT {
     const payload = { userId, sessionId };
 
     const accessToken = jwt.sign(payload, this.privateKey, {
-      algorithm: "EdDSA",
+      algorithm: "EdDSA" as jwt.Algorithm,
       expiresIn: "15m",
     });
 
     const refreshToken = jwt.sign(payload, this.privateKey, {
-      algorithm: "EdDSA",
+      algorithm: "EdDSA" as jwt.Algorithm,
       expiresIn: "7d",
     });
 
@@ -64,7 +64,7 @@ export class JWT {
     token: string,
     isSessionValid: (sessionId: string) => Promise<boolean>
   ) {
-    const decoded = jwt.verify(token, this.publicKey, { algorithms: ["EdDSA"] });
+    const decoded = jwt.verify(token, this.publicKey, { algorithms: ["EdDSA" as jwt.Algorithm] });
 
     if (!decoded || typeof decoded !== "object" || !decoded.sessionId) {
       throw new Error("Invalid token.");
