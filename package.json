@@ -38,7 +38,7 @@
     "uuid": "^11.1.0"
   },
   "bin": {
-    "secure-auth": "./cli.js"
+    "secure-auth": "cli.js"
   },
   "devDependencies": {
     "@types/node": "^22.13.4",
