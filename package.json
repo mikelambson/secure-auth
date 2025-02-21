@@ -38,11 +38,12 @@
     "@simplewebauthn/server": "^13.1.1",
     "argon2": "^0.41.1",
     "cookie": "^1.0.2",
+    "dotenv": "^16.4.7",
     "jsonwebtoken": "^9.0.2",
     "uuid": "^11.1.0"
   },
   "bin": {
-    "secure-auth": "dist/bin/cli.js"
+    "secure-auth": "esm/bin/cli.js"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.8",
