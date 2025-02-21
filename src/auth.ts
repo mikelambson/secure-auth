@@ -2,6 +2,9 @@ import { JWT } from "./jwt.js";
 import { Encryption } from "./encryption.js";
 import { WebAuthn } from "./webauthn.js";
 
+interface User { id: string; login: string; password: string; }
+interface AuthTokens { accessToken: string; refreshToken: string; sessionId: string; }
+
 interface SessionStore {
   saveSession(sessionId: string, userId: string): Promise<boolean>;
   isSessionValid(sessionId: string): Promise<boolean>;
@@ -14,8 +17,8 @@ export class AuthService {
   private webauthn: WebAuthn;
   private sessionStore: SessionStore;
 
-  constructor(secret: string, sessionStore: SessionStore) {
-    this.jwt = new JWT(secret);
+  constructor(privateKey: string, publicKey: string, sessionStore: SessionStore) {
+    this.jwt = new JWT(privateKey, publicKey); // Pass raw strings
     this.encryption = new Encryption();
     this.webauthn = new WebAuthn();
     this.sessionStore = sessionStore;
@@ -33,7 +36,7 @@ export class AuthService {
    * Change an existing user's password.
    */
   async changePassword(
-    user: { id: string; login: string; password: string },
+    user: User,
     oldPassword: string,
     newPassword: string,
     updatePassword: (userId: string, newHashedPassword: string) => Promise<void>
@@ -51,7 +54,10 @@ export class AuthService {
   /**
    * Authenticate a user and generate access/refresh tokens.
    */
-  async login(user: { id: string; login: string; password: string }, inputPassword: string) {
+  async login(
+    user: { id: string; login: string; password: string },
+    inputPassword: string
+  ) {
     if (!(await this.encryption.verifyPassword(inputPassword, user.password))) {
       throw new Error("Invalid credentials");
     }
@@ -70,7 +76,12 @@ export class AuthService {
     userVerification: "preferred" | "required" | "discouraged",
     storeChallenge: (userId: string, challenge: string) => Promise<void>
   ) {
-    return this.webauthn.generateChallenge(userId, rpID, userVerification, storeChallenge);
+    return this.webauthn.generateChallenge(
+      userId,
+      rpID,
+      userVerification,
+      storeChallenge
+    );
   }
 
   /**
@@ -120,13 +131,19 @@ export class AuthService {
     res: { setHeader: (name: string, value: string) => void },
     token: string
   ) {
-    res.setHeader("Set-Cookie", `authToken=${token}; HttpOnly; Secure; Path=/;`);
+    res.setHeader(
+      "Set-Cookie",
+      `authToken=${token}; HttpOnly; Secure; Path=/;`
+    );
   }
 
   /**
    * Clear a user's session cookie (Logout).
    */
   clearSession(res: { setHeader: (name: string, value: string) => void }) {
-    res.setHeader("Set-Cookie", `authToken=; HttpOnly; Secure; Path=/; Max-Age=0;`);
+    res.setHeader(
+      "Set-Cookie",
+      `authToken=; HttpOnly; Secure; Path=/; Max-Age=0;`
+    );
   }
 }

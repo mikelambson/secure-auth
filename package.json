@@ -1,7 +1,7 @@
 {
   "name": "@mikelambson/secure-auth",
-  "version": "1.0.0-alpha.3",
-  "description": "A secure, configurable authentication framework for Node.js applications, supporting Argon2, JWTs, ECDSA, RSA, and multiple databases/frameworks (alpha, incomplete).",
+  "version": "1.0.0-alpha.4",
+  "description": "A secure, modular authentication framework for Node.js, featuring Argon2 password hashing, EdDSA-signed JWTs, and flexible session management. Includes WebAuthn passkey support with plans for RSA and multi-database integration (alpha).",
   "keywords": [
     "authentication",
     "jwt",
@@ -24,10 +24,10 @@
   "license": "BSD-3-Clause",
   "author": "V. Michael Lambson <mikelambson@example.com>",
   "type": "module",
-  "main": "dist/auth.js",
-  "types": "auth.d.ts",
+  "main": "esm/index.js",
+  "types": "esm/types/index.d.ts",
   "files": [
-    "dist"
+    "esm"
   ],
   "scripts": {
     "build": "tsc",

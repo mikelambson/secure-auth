@@ -7,19 +7,12 @@ export class JWT {
   private privateKey: string;
   private publicKey: string;
 
-  constructor(privateKeyPath?: string, publicKeyPath?: string) {
-    // Load keys from files (or environment variables)
-    this.privateKey = privateKeyPath
-      ? fs.readFileSync(path.resolve(privateKeyPath), "utf8")
-      : process.env.JWT_PRIVATE_KEY!;
-
-    this.publicKey = publicKeyPath
-      ? fs.readFileSync(path.resolve(publicKeyPath), "utf8")
-      : process.env.JWT_PUBLIC_KEY!;
-
-    if (!this.privateKey || !this.publicKey) {
-      throw new Error("JWT private and public keys must be provided.");
+  constructor(privateKey: string, publicKey: string) { // Raw strings, no paths
+    if (!privateKey || !publicKey) {
+      throw new Error('JWT requires both private and public keys');
     }
+    this.privateKey = privateKey;
+    this.publicKey = publicKey;
   }
 
   /**
