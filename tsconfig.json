@@ -3,8 +3,8 @@
     "lib": ["ESNext"],
     "module": "NodeNext",
     "target": "ES2020",
+    "rootDir": "./src", // Change to root so types/ is included
     "outDir": "./dist",
-    "rootDir": ".", // Change to root so types/ is included
     "strict": true,
     "moduleResolution": "NodeNext",
     "esModuleInterop": true,
