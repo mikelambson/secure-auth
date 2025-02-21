@@ -1,6 +1,6 @@
 {
   "name": "@mikelambson/secure-auth",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "A secure, configurable authentication framework for Node.js applications, supporting Argon2, JWTs, ECDSA, RSA, and multiple databases/frameworks (alpha, incomplete).",
   "keywords": [
     "authentication",
@@ -26,7 +26,9 @@
   "type": "module",
   "main": "dist/auth.js",
   "types": "auth.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "jest"
