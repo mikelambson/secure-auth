@@ -3,14 +3,14 @@
     "lib": ["ESNext"],
     "module": "NodeNext",
     "target": "ES2020",
-    "rootDir": "./src", // Change to root so types/ is included
+    "rootDir": "./src",
     "outDir": "./esm",
     "strict": true,
     "moduleResolution": "NodeNext",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "declaration": true, // Generate .d.ts files in dist
-    "declarationDir": "./dist/types" // Optional: separate types output
+    "declaration": true, // Generate .d.ts files
+    "declarationDir": "./esm/types" 
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "types/**/*.d.ts", "src/bin/**/*.ts"]
 }
