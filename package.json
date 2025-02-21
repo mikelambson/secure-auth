@@ -1,6 +1,6 @@
 {
   "name": "@mikelambson/secure-auth",
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0-alpha.7",
   "description": "A secure, modular authentication framework for Node.js, featuring Argon2 password hashing, EdDSA-signed JWTs, and flexible session management. Includes WebAuthn passkey support with plans for RSA and multi-database integration (alpha).",
   "keywords": [
     "authentication",
