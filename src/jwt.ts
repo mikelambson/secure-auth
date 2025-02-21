@@ -1,6 +1,4 @@
 import * as jwt from "jsonwebtoken";
-import * as fs from "fs";
-import * as path from "path";
 import { v4 as uuidv4 } from "uuid";
 
 export class JWT {
@@ -70,5 +68,16 @@ export class JWT {
     }
 
     return decoded;
+  }
+
+  async refreshToken(refreshToken: string, storeSession: (sessionId: string, userId: string) => Promise<boolean>) {
+    const decoded = await this.verifyToken(refreshToken, async () => true); // Skip session check for refresh
+
+    const newAccessToken = jwt.sign({ userId: decoded.userId, sessionId: decoded.sessionId }, this.privateKey, {
+      algorithm: 'EdDSA' as jwt.Algorithm,
+      expiresIn: '15m'
+    });
+
+    return { accessToken: newAccessToken };
   }
 }

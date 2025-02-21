@@ -114,6 +114,13 @@ export class AuthService {
     });
   }
 
+  async refresh(refreshToken: string) {
+    return this.jwt.refreshToken(
+      refreshToken,
+      this.sessionStore ? (sessionId, userId) => this.sessionStore.saveSession(sessionId, userId) : async () => true
+    );
+  }
+
   /**
    * Logout: Delete session from database (Invalidates token).
    */
