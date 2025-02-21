@@ -1,6 +1,6 @@
 {
   "name": "@mikelambson/secure-auth",
-  "version": "0.1.0-alpha",
+  "version": "1.0.0-alpha.2",
   "description": "A secure, configurable authentication framework for Node.js applications, supporting Argon2, JWTs, ECDSA, RSA, and multiple databases/frameworks (alpha, incomplete).",
   "keywords": [
     "authentication",
@@ -23,7 +23,7 @@
   "private": false,
   "license": "BSD-3-Clause",
   "author": "V. Michael Lambson <mikelambson@example.com>",
-  "type": "module",
+  "type": "commonjs",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
