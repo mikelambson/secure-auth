@@ -1,6 +1,6 @@
-import { JWT } from "./jwt";
-import { Encryption } from "./encryption";
-import { WebAuthn } from "./webauthn";
+import { JWT } from "./jwt.js";
+import { Encryption } from "./encryption.js";
+import { WebAuthn } from "./webauthn.js";
 
 interface SessionStore {
   saveSession(sessionId: string, userId: string): Promise<boolean>;

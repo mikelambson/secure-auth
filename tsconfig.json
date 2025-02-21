@@ -1,11 +1,16 @@
 {
-    "compilerOptions": {
-      "lib": ["ESNext"],
-      "module": "CommonJS",
-      "types": ["node"],
-      "outDir": "./dist",
-      "rootDir": "./src",
-      "strict": true
-    },
-    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/bin/**/*.ts"],
+  "compilerOptions": {
+    "lib": ["ESNext"],
+    "module": "NodeNext",
+    "target": "ES2020",
+    "outDir": "./dist",
+    "rootDir": ".", // Change to root so types/ is included
+    "strict": true,
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "declaration": true, // Generate .d.ts files in dist
+    "declarationDir": "./dist/types" // Optional: separate types output
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "types/**/*.d.ts", "src/bin/**/*.ts"]
 }

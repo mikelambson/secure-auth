@@ -23,9 +23,10 @@
   "private": false,
   "license": "BSD-3-Clause",
   "author": "V. Michael Lambson <mikelambson@example.com>",
-  "type": "commonjs",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "type": "module",
+  "main": "dist/auth.js",
+  "types": "auth.d.ts",
+  "files": ["dist"],
   "scripts": {
     "build": "tsc",
     "test": "jest"
