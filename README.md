@@ -95,10 +95,16 @@ export class PrismaSessionStore implements SessionStore {
 ### **2️⃣ Initialize `AuthService`**
 ```ts
 import { AuthService } from "@mikelambson/secure-auth";
+import { readFileSync } from 'fs';
 import { MySessionStore } from "./mySessionStore";
 
+// Load your Ed25519 key pair (e.g., from .env or files)
+const privateKey = readFileSync(process.env.JWT_PRIVATE_KEY!, 'utf8');
+const publicKey = readFileSync(process.env.JWT_PUBLIC_KEY!, 'utf8');
+
+// Optional: Pass a session store implementation (or null to bypass)
 const sessionStore = new MySessionStore();
-const authService = new AuthService(process.env.JWT_SECRET!, sessionStore);
+const authService = new AuthService(privateKey, publicKey, sessionStore);
 ```
 
 ---
