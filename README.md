@@ -103,7 +103,7 @@ const privateKey = readFileSync(process.env.JWT_PRIVATE_KEY!, 'utf8');
 const publicKey = readFileSync(process.env.JWT_PUBLIC_KEY!, 'utf8');
 
 // Optional: Pass a session store implementation (or null to bypass)
-const sessionStore = new MySessionStore();
+const sessionStore = new MySessionStore(); //from your created store constructor
 const authService = new AuthService(privateKey, publicKey, sessionStore);
 ```
 
