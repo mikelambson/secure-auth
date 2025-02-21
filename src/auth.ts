@@ -1,6 +1,9 @@
 import { JWT } from "./jwt.js";
 import { Encryption } from "./encryption.js";
 import { WebAuthn } from "./webauthn.js";
+import dotenv from 'dotenv';
+import { join } from 'path';
+import { readFileSync } from 'fs';
 
 interface User { id: string; login: string; password: string; }
 interface AuthTokens { accessToken: string; refreshToken: string; sessionId: string; }
@@ -17,7 +20,26 @@ export class AuthService {
   private webauthn: WebAuthn;
   private sessionStore: SessionStore;
 
-  constructor(privateKey: string, publicKey: string, sessionStore: SessionStore) {
+  constructor(sessionStore: SessionStore, privateKey?: string, publicKey?: string ) {
+   // Load .env if present
+   const envPath = join(process.cwd(), '.env');
+   dotenv.config({ path: envPath });
+
+   // Default key file locations
+   const defaultPrivateKeyPath = join(process.cwd(), '.secure-auth', 'private-key.pem');
+   const defaultPublicKeyPath = join(process.cwd(), '.secure-auth', 'public-key.pem');
+   const privateKeyPath = process.env.JWT_PRIVATE_KEY || defaultPrivateKeyPath;
+   const publicKeyPath = process.env.JWT_PUBLIC_KEY || defaultPublicKeyPath;
+
+   // Read keys—fail if missing
+   try {
+     privateKey = readFileSync(privateKeyPath, 'utf8');
+     publicKey = readFileSync(publicKeyPath, 'utf8');
+   } catch (error) {
+     throw new Error(`Failed to load keys from ${privateKeyPath} or ${publicKeyPath}. Run 'npx secure-auth init' or set JWT_PRIVATE_KEY and JWT_PUBLIC_KEY in .env`);
+   }
+
+
     this.jwt = new JWT(privateKey, publicKey); // Pass raw strings
     this.encryption = new Encryption();
     this.webauthn = new WebAuthn();
